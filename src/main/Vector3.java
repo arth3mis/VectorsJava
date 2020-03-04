@@ -4,7 +4,7 @@ public class Vector3 {
 
     double x, y, z;
 
-    // contstructors
+    // constructors
     /**
      * Creates new Vector that copies the values of <code>vCopy</code>
      * @param vCopy
@@ -33,21 +33,24 @@ public class Vector3 {
      * If 1-3 booleans are passed, values will be randomized:
      *  (true -> all=random;
      *   false, true -> x=0, y=random, z=0)
+     *
+     * The random Vector will be at most <code>maxLen</code> long.
+     * @param maxLen maximum vector length
      * @param b up to 3 boolean values
      */
-    public Vector3(boolean ... b) {
+    public Vector3(double maxLen, boolean ... b) {
         x = 0;
         y = 0;
         z = 0;
 
         if (b.length > 0) {
             if (b[0])
-                x = Math.random()-0.5;
-            if (b.length > 1 && b[1])
-                y = Math.random()-0.5;
-            if (b.length > 2 && b[2])
-                z = Math.random()-0.5;
-            normalize();
+                x = Math.random()*maxLen * Math.signum(Math.random()-0.5);
+            if ((b.length > 1 && b[1]) || (b.length == 1 && b[0]))
+                y = Math.random()*maxLen * Math.signum(Math.random()-0.5);
+            if ((b.length > 2 && b[2]) || (b.length == 1 && b[0]))
+                z = Math.random()*maxLen * Math.signum(Math.random()-0.5);
+            limit(maxLen);
         }
     }
 
@@ -82,9 +85,10 @@ public class Vector3 {
     }
 
     void normalize() {
-        x /= length();
-        y /= length();
-        z /= length();
+        double l = length();
+        x /= l;
+        y /= l;
+        z /= l;
     }
 
     void limit(double l) {
@@ -148,4 +152,22 @@ public class Vector3 {
         return (int) Math.round(z);
     }
 
+    // print methods
+    /**@param n after-comma digits*/
+    public void print(int n) {
+        String s = "(%.2f|%.2f|%.2f)%n".replaceAll("2", (n>=0?Integer.toString(n):"2"));
+        System.out.printf(s, x, y, z);
+    }
+
+    /**@param n after-comma digits*/
+    public String getPrint(int n) {
+        String s = "(%.2f|%.2f|%.2f)".replaceAll("2", (n>=0?Integer.toString(n):"2"));
+        return String.format(s, x, y, z);
+    }
+
+    /**@param n after-comma digits*/
+    public void printV(int n) {
+        String s = "(%.2f|%.2f|%.2f; l=%.2f)%n".replaceAll("2", (n>=0?Integer.toString(n):"2"));
+        System.out.printf(s, x, y, length());
+    }
 }

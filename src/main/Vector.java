@@ -72,8 +72,9 @@ public class Vector {
     }
 
     void normalize() {
-        x = x / length();
-        y = y / length();
+        double l = length();
+        x /= l;
+        y /= l;
     }
 
     void limit(double l) {
@@ -113,4 +114,22 @@ public class Vector {
         return (int) Math.round(y);
     }
 
+    // print methods
+    /**@param n after-comma digits*/
+    public void print(int n) {
+        String s = "(%.2f|%.2f)%n".replaceAll("2", (n>=0?Integer.toString(n):"2"));
+        System.out.printf(s, x, y);
+    }
+
+    /**@param n after-comma digits*/
+    public String getPrint(int n) {
+        String s = "(%.2f|%.2f)".replaceAll("2", (n>=0?Integer.toString(n):"2"));
+        return String.format(s, x, y);
+    }
+
+    /**@param n after-comma digits*/
+    public void printV(int n) {
+        String s = "(%.2f|%.2f; α=%.2f*PI; l=%.2f)%n".replaceAll("2", (n>=0?Integer.toString(n):"2"));
+        System.out.printf(s, x, y, angle(), length());
+    }
 }
