@@ -6,8 +6,8 @@ public class Vector {
 
     // constructors
     /**
-     * Creates new Vector that copies the values of <code>vCopy</code>
-     * @param vCopy
+     * Creates new Vector that copies the values of <code>vCopy</code>.
+     * @param vCopy vector to copy
      */
     public Vector(Vector vCopy) {
         this.x = vCopy.x;
@@ -55,10 +55,18 @@ public class Vector {
         x += v.x;
         y += v.y;
     }
+    void add(double x, double y) {
+        this.x += x;
+        this.y += y;
+    }
 
     void sub(Vector v) {
         x -= v.x;
         y -= v.y;
+    }
+    void sub(double x, double y) {
+        this.x -= x;
+        this.y -= y;
     }
 
     void mult(double s) {
@@ -86,7 +94,7 @@ public class Vector {
 
     // non-altering methods
     /**
-     * Dot product of this vector and a 2nd vector
+     * Dot product of this vector and a 2nd vector.
      * @param v another Vector
      * @return double
      */
@@ -96,16 +104,16 @@ public class Vector {
 
     // static methods
     /**
-     * Distance between to vectors/length of vector between v1 and v2 (i.e. v1.sub(v2))
+     * Distance between to vectors/length of vector between v1 and v2 (i.e. v1.sub(v2)).
      * @param v1
      * @param v2
      * @return double
      */
     public static double dist(Vector v1, Vector v2) {
-        Vector v = new Vector(v1.x-v2.x, v1.y-v2.y);
-        return v.length();
+        return new Vector(v1.x-v2.x, v1.y-v2.y).length();
     }
 
+    // rounded getters
     int getRdX() {
         return (int) Math.round(x);
     }
@@ -115,10 +123,16 @@ public class Vector {
     }
 
     // print methods
+    public static int stdDigits = 2;
     /**@param n after-comma digits*/
     public void print(int n) {
         String s = "(%.2f|%.2f)%n".replaceAll("2", (n>=0?Integer.toString(n):"2"));
         System.out.printf(s, x, y);
+    }
+    public void print() {
+        if (stdDigits < 0)
+            stdDigits = 0;
+        print(stdDigits);
     }
 
     /**@param n after-comma digits*/
@@ -126,10 +140,20 @@ public class Vector {
         String s = "(%.2f|%.2f)".replaceAll("2", (n>=0?Integer.toString(n):"2"));
         return String.format(s, x, y);
     }
+    public String getPrint() {
+        if (stdDigits < 0)
+            stdDigits = 0;
+        return getPrint(stdDigits);
+    }
 
     /**@param n after-comma digits*/
     public void printV(int n) {
         String s = "(%.2f|%.2f; α=%.2f*PI; l=%.2f)%n".replaceAll("2", (n>=0?Integer.toString(n):"2"));
         System.out.printf(s, x, y, angle(), length());
+    }
+    public void printV() {
+        if (stdDigits < 0)
+            stdDigits = 0;
+        printV(stdDigits);
     }
 }

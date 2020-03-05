@@ -6,7 +6,7 @@ public class Vector3 {
 
     // constructors
     /**
-     * Creates new Vector that copies the values of <code>vCopy</code>
+     * Creates new Vector that copies the values of <code>vCopy</code>.
      * @param vCopy
      */
     public Vector3(Vector3 vCopy) {
@@ -100,7 +100,7 @@ public class Vector3 {
 
     // non-altering methods
     /**
-     * Dot product of this vector and a 2nd vector
+     * Dot product of this vector and a 2nd vector.
      * @param v another Vector3
      * @return double
      */
@@ -109,7 +109,7 @@ public class Vector3 {
     }
 
     /**
-     * Angle between this vector and a 2nd vector
+     * Angle between this vector and a 2nd vector.
      * @param v another Vector3
      * @return double
      */
@@ -119,7 +119,7 @@ public class Vector3 {
 
     /**
      * NOT IMPLEMENTED YET
-     * Creates cross product Vector
+     * Creates cross product Vector.
      * @param v another Vector3
      * @return Vector3
      */
@@ -129,7 +129,7 @@ public class Vector3 {
 
     // static methods
     /**
-     * Distance between to vectors/length of vector between v1 and v2 (i.e. v1.sub(v2))
+     * Distance between to vectors/length of vector between v1 and v2 (i.e. v1.sub(v2)).
      * @param v1
      * @param v2
      * @return double
