@@ -1,4 +1,4 @@
-package main;
+package de.sirarthur.math;
 
 public class Vector3 {
 

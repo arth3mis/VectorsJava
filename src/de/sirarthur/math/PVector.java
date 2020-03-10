@@ -1,11 +1,11 @@
-package main;
+package de.sirarthur.math;
 
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
-public class PVector {
+public class PVector implements Vecthur {
 
     private DoubleProperty X, Y;
     private boolean isBoundX, isBoundY;
@@ -32,6 +32,7 @@ public class PVector {
 
     /**
      * Creates unit-length <code>PVector</code> calculated from given angle (in Radians).
+     * With the y-axis going down, the increasing angle describes a counter-clockwise rotation.
      * @param a angle
      * @return PVector
      */
@@ -42,7 +43,6 @@ public class PVector {
     }
 
     // both coordinates bound
-
     /**
      * Binds this PVector's coordinates to the given PVector's coordinates.
      * @param v PVector to bind to
@@ -147,7 +147,7 @@ public class PVector {
     }
 
     // vector property getters
-    double angle() {
+    public double angle() {
         double a;
         a = Math.atan(Y()/X());
         if (X() < 0)
@@ -157,52 +157,52 @@ public class PVector {
         return a;
     }
 
-    double length() {
+    public double length() {
         return Math.sqrt(X()*X() + Y()*Y());
     }
 
     // manipulation methods
-    void add(Vector v) {
+    public void add(Vector v) {
         if (!isBoundX)
             X.set(X() + v.x);
         if (!isBoundY)
             Y.set(Y() + v.y);
     }
-    void add(double x, double y) {
+    public void add(double x, double y) {
         if (!isBoundX)
             X.set(X() + x);
         if (!isBoundY)
             Y.set(Y() + y);
     }
 
-    void sub(Vector v) {
+    public void sub(Vector v) {
         if (!isBoundX)
             X.set(X() - v.x);
         if (!isBoundY)
             Y.set(Y() - v.y);
     }
-    void sub(double x, double y) {
+    public void sub(double x, double y) {
         if (!isBoundX)
             X.set(X() - x);
         if (!isBoundY)
             Y.set(Y() - y);
     }
 
-    void mult(double s) {
+    public void mult(double s) {
         if (!isBoundX)
             X.set(X() * s);
         if (!isBoundY)
             Y.set(Y() * s);
     }
 
-    void div(double s) {
+    public void div(double s) {
         if (!isBoundX)
             X.set(X() / s);
         if (!isBoundY)
             Y.set(Y() / s);
     }
 
-    void normalize() {
+    public void normalize() {
         if (!isBoundX && !isBoundY) {
             double l = length();
             X.set(X() / l);
@@ -210,7 +210,7 @@ public class PVector {
         }
     }
 
-    void limit(double l) {
+    public void limit(double l) {
         if (length() > l && !isBoundX && !isBoundY) {
             normalize();
             mult(l);
@@ -223,7 +223,7 @@ public class PVector {
      * @param v another PVector
      * @return double
      */
-    double dot(PVector v) {
+    public double dot(PVector v) {
         return (X()*v.getX() + Y.get()*v.getY());
     }
     /**
@@ -231,7 +231,7 @@ public class PVector {
      * @param v another vector
      * @return double
      */
-    double dot(Vector v) {
+    public double dot(Vector v) {
         return (X()*v.y + Y()*v.y);
     }
 
@@ -244,21 +244,21 @@ public class PVector {
     }
 
     // property actions
-    void bind(PVector v) {
+    public void bind(PVector v) {
         bindX(v.X);
         bindY(v.Y);
     }
 
-    void bindX(DoubleBinding x) {
+    public void bindX(DoubleBinding x) {
         if (isBoundX)
             X.unbind();
         X.bind(x);
     }
-    void bindX(ReadOnlyDoubleProperty x) {
+    public void bindX(ReadOnlyDoubleProperty x) {
         bindX(x.add(0));
     }
 
-    void unbindX() {
+    public void unbindX() {
         if (isBoundX) {
             double x = X();
             X.unbind();
@@ -266,16 +266,16 @@ public class PVector {
         }
     }
 
-    void bindY(DoubleBinding y) {
+    public void bindY(DoubleBinding y) {
         if (isBoundY)
             Y.unbind();
         Y.bind(y);
     }
-    void bindY(ReadOnlyDoubleProperty y) {
+    public void bindY(ReadOnlyDoubleProperty y) {
         bindX(y.add(0));
     }
 
-    void unbindY() {
+    public void unbindY() {
         if (isBoundY) {
             double y = Y();
             Y.unbind();
@@ -299,36 +299,36 @@ public class PVector {
         return Y.get();
     }
 
-    double getX() {
+    public double getX() {
         return X.get();
     }
 
-    double getY() {
+    public double getY() {
         return Y.get();
     }
 
-    void setX(double x) {
+    public void setX(double x) {
         if (!isBoundX)
             X.set(x);
     }
 
-    void setY(double y) {
+    public void setY(double y) {
         if (!isBoundY)
             Y.set(y);
     }
 
     // rounded getters
-    int getRdX() {
+    public int getRdX() {
         return (int) Math.round(X());
     }
 
-    int getRdY() {
+    public int getRdY() {
         return (int) Math.round(Y());
     }
 
     // print methods
-    public static int stdDigits = 2;
-    /**@param n after-comma digits*/
+    public static int stdDigits = Vecthur.stdDigits;
+
     public void print(int n) {
         String s = "(%.2f|%.2f)%n".replaceAll("2", (n>=0?Integer.toString(n):"2"));
         System.out.printf(s, X(), Y());
@@ -339,7 +339,6 @@ public class PVector {
         print(stdDigits);
     }
 
-    /**@param n after-comma digits*/
     public String getPrint(int n) {
         String s = "(%.2f|%.2f)".replaceAll("2", (n>=0?Integer.toString(n):"2"));
         return String.format(s, X(), Y());
@@ -350,7 +349,6 @@ public class PVector {
         return getPrint(stdDigits);
     }
 
-    /**@param n after-comma digits*/
     public void printV(int n) {
         String s = "(%.2f|%.2f; α=%.2f*PI; l=%.2f)%n".replaceAll("2", (n>=0?Integer.toString(n):"2"));
         System.out.printf(s, X(), Y(), angle(), length());

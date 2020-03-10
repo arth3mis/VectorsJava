@@ -1,6 +1,6 @@
-package main;
+package de.sirarthur.math;
 
-public class Vector {
+public class Vector implements Vecthur {
 
     double x, y;
 
@@ -26,6 +26,7 @@ public class Vector {
 
     /**
      * Creates unit-length <code>Vector</code> calculated from given angle (in Radians).
+     * With the y-axis going down, the increasing angle describes a counter-clockwise rotation.
      * @param a angle
      * @return Vector
      */
@@ -36,7 +37,7 @@ public class Vector {
     }
 
     // vector property getters
-    double angle() {
+    public double angle() {
         double a;
         a = Math.atan(y/x);
         if (x < 0)
@@ -46,46 +47,46 @@ public class Vector {
         return a;
     }
 
-    double length() {
+    public double length() {
         return Math.sqrt(x*x+y*y);
     }
 
     // manipulation methods
-    void add(Vector v) {
+    public void add(Vector v) {
         x += v.x;
         y += v.y;
     }
-    void add(double x, double y) {
+    public void add(double x, double y) {
         this.x += x;
         this.y += y;
     }
 
-    void sub(Vector v) {
+    public void sub(Vector v) {
         x -= v.x;
         y -= v.y;
     }
-    void sub(double x, double y) {
+    public void sub(double x, double y) {
         this.x -= x;
         this.y -= y;
     }
 
-    void mult(double s) {
+    public void mult(double s) {
         x *= s;
         y *= s;
     }
 
-    void div(double s) {
+    public void div(double s) {
         x /= s;
         y /= s;
     }
 
-    void normalize() {
+    public void normalize() {
         double l = length();
         x /= l;
         y /= l;
     }
 
-    void limit(double l) {
+    public void limit(double l) {
         if (length() > l) {
             normalize();
             mult(l);
@@ -98,7 +99,7 @@ public class Vector {
      * @param v another Vector
      * @return double
      */
-    double dot(Vector v) {
+    public double dot(Vector v) {
         return (x*v.y + y*v.y);
     }
 
@@ -114,17 +115,17 @@ public class Vector {
     }
 
     // rounded getters
-    int getRdX() {
+    public int getRdX() {
         return (int) Math.round(x);
     }
 
-    int getRdY() {
+    public int getRdY() {
         return (int) Math.round(y);
     }
 
     // print methods
-    public static int stdDigits = 2;
-    /**@param n after-comma digits*/
+    public static int stdDigits = Vecthur.stdDigits;
+
     public void print(int n) {
         String s = "(%.2f|%.2f)%n".replaceAll("2", (n>=0?Integer.toString(n):"2"));
         System.out.printf(s, x, y);
@@ -135,7 +136,6 @@ public class Vector {
         print(stdDigits);
     }
 
-    /**@param n after-comma digits*/
     public String getPrint(int n) {
         String s = "(%.2f|%.2f)".replaceAll("2", (n>=0?Integer.toString(n):"2"));
         return String.format(s, x, y);
@@ -146,7 +146,6 @@ public class Vector {
         return getPrint(stdDigits);
     }
 
-    /**@param n after-comma digits*/
     public void printV(int n) {
         String s = "(%.2f|%.2f; α=%.2f*PI; l=%.2f)%n".replaceAll("2", (n>=0?Integer.toString(n):"2"));
         System.out.printf(s, x, y, angle(), length());
