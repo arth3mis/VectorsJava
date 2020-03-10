@@ -243,6 +243,25 @@ public class PVector implements Vecthur {
         return new Vector(v1.X()-v2.X(), v1.Y()-v2.Y()).length();
     }
 
+    // getters and setters
+    public double getX() {
+        return X.get();
+    }
+
+    public double getY() {
+        return Y.get();
+    }
+
+    public void setX(double x) {
+        if (!isBoundX)
+            X.set(x);
+    }
+
+    public void setY(double y) {
+        if (!isBoundY)
+            Y.set(y);
+    }
+
     // property actions
     public void bind(PVector v) {
         bindX(v.X);
@@ -297,24 +316,6 @@ public class PVector implements Vecthur {
 
     private double Y() {
         return Y.get();
-    }
-
-    public double getX() {
-        return X.get();
-    }
-
-    public double getY() {
-        return Y.get();
-    }
-
-    public void setX(double x) {
-        if (!isBoundX)
-            X.set(x);
-    }
-
-    public void setY(double y) {
-        if (!isBoundY)
-            Y.set(y);
     }
 
     // rounded getters

@@ -114,6 +114,23 @@ public class Vector implements Vecthur {
         return new Vector(v1.x-v2.x, v1.y-v2.y).length();
     }
 
+    // getters and setters
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
     // rounded getters
     public int getRdX() {
         return (int) Math.round(x);

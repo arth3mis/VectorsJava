@@ -23,21 +23,27 @@ public interface Vecthur {
         return 0;
     }
 
+    // getters and setters
+    double getX();
+    double getY();
+    void setX(double x);
+    void setY(double y);
+
     // rounded getters
     int getRdX();
     int getRdY();
 
     // print methods
-    public static int stdDigits = 2;
+    int stdDigits = 2;
     /**@param n after-comma digits*/
-    public void print(int n);
-    public void print();
+    void print(int n);
+    void print();
 
     /**@param n after-comma digits*/
-    public String getPrint(int n);
-    public String getPrint();
+    String getPrint(int n);
+    String getPrint();
 
     /**@param n after-comma digits*/
-    public void printV(int n);
-    public void printV();
+    void printV(int n);
+    void printV();
 }
