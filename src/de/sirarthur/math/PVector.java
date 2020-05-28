@@ -162,11 +162,11 @@ public class PVector implements Vecthur {
     }
 
     // manipulation methods
-    public void add(Vector v) {
+    public void add(Vecthur v) {
         if (!isBoundX)
-            X.set(X() + v.x);
+            X.set(X() + v.getX());
         if (!isBoundY)
-            Y.set(Y() + v.y);
+            Y.set(Y() + v.getY());
     }
     public void add(double x, double y) {
         if (!isBoundX)
@@ -175,11 +175,11 @@ public class PVector implements Vecthur {
             Y.set(Y() + y);
     }
 
-    public void sub(Vector v) {
+    public void sub(Vecthur v) {
         if (!isBoundX)
-            X.set(X() - v.x);
+            X.set(X() - v.getX());
         if (!isBoundY)
-            Y.set(Y() - v.y);
+            Y.set(Y() - v.getY());
     }
     public void sub(double x, double y) {
         if (!isBoundX)
@@ -219,28 +219,12 @@ public class PVector implements Vecthur {
 
     // non-altering methods
     /**
-     * Dot product of this PVector and a 2nd PVector.
-     * @param v another PVector
+     * Dot product of this PVector and a 2nd Vecthur.
+     * @param v another Vecthur
      * @return double
      */
-    public double dot(PVector v) {
-        return (X()*v.getX() + Y.get()*v.getY());
-    }
-    /**
-     * Dot product of this PVector and a 2nd (normal) vector.
-     * @param v another vector
-     * @return double
-     */
-    public double dot(Vector v) {
-        return (X()*v.y + Y()*v.y);
-    }
-
-    // static methods
-    /**
-     * @see Vector
-     */
-    public static double dist(PVector v1, PVector v2) {
-        return new Vector(v1.X()-v2.X(), v1.Y()-v2.Y()).length();
+    public double dot(Vecthur v) {
+        return (X()*v.getX() + Y()*v.getY());
     }
 
     // getters and setters

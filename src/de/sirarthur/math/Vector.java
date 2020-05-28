@@ -52,18 +52,18 @@ public class Vector implements Vecthur {
     }
 
     // manipulation methods
-    public void add(Vector v) {
-        x += v.x;
-        y += v.y;
+    public void add(Vecthur v) {
+        x += v.getX();
+        y += v.getY();
     }
     public void add(double x, double y) {
         this.x += x;
         this.y += y;
     }
 
-    public void sub(Vector v) {
-        x -= v.x;
-        y -= v.y;
+    public void sub(Vecthur v) {
+        x -= v.getX();
+        y -= v.getY();
     }
     public void sub(double x, double y) {
         this.x -= x;
@@ -95,23 +95,12 @@ public class Vector implements Vecthur {
 
     // non-altering methods
     /**
-     * Dot product of this vector and a 2nd vector.
-     * @param v another Vector
+     * Dot product of this vector and a 2nd Vecthur.
+     * @param v another Vecthur
      * @return double
      */
-    public double dot(Vector v) {
-        return (x*v.y + y*v.y);
-    }
-
-    // static methods
-    /**
-     * Distance between to vectors/length of vector between v1 and v2 (i.e. v1.sub(v2)).
-     * @param v1
-     * @param v2
-     * @return double
-     */
-    public static double dist(Vector v1, Vector v2) {
-        return new Vector(v1.x-v2.x, v1.y-v2.y).length();
+    public double dot(Vecthur v) {
+        return (x*v.getX() + y*v.getY());
     }
 
     // getters and setters

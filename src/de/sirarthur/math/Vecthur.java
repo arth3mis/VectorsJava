@@ -6,9 +6,9 @@ public interface Vecthur {
     double length();
 
     // manipulation methods
-    void add(Vector v);
+    void add(Vecthur v);
     void add(double x, double y);
-    void sub(Vector v);
+    void sub(Vecthur v);
     void sub(double x, double y);
     void mult(double s);
     void div(double s);
@@ -16,11 +16,11 @@ public interface Vecthur {
     void limit(double l);
 
     // non-altering methods
-    double dot(Vector v);
+    double dot(Vecthur v);
 
     // static methods
-    static double dist(Vector v1, Vector v2) {
-        return 0;
+    static double dist(Vecthur v1, Vecthur v2) {
+        return new Vector(v1.getX()-v2.getX(), v1.getY()-v2.getY()).length();
     }
 
     // getters and setters
@@ -35,6 +35,7 @@ public interface Vecthur {
 
     // print methods
     int stdDigits = 2;
+
     /**@param n after-comma digits*/
     void print(int n);
     void print();
