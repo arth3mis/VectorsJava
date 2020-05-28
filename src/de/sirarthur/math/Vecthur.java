@@ -47,4 +47,9 @@ public interface Vecthur {
     /**@param n after-comma digits*/
     void printV(int n);
     void printV();
+
+
+    Vecthur clone();
+    boolean equals(Object obj);
+    int hashCode();
 }

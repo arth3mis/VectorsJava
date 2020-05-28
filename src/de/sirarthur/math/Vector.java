@@ -161,4 +161,28 @@ public class Vector implements Vecthur {
             stdDigits = 0;
         printV(stdDigits);
     }
+
+
+    @Override
+    public Vecthur clone() {
+        return new Vector(x, y);
+    }
+
+    @Override
+    public int hashCode() {
+        String s = x+";"+y;
+        return s.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Vector) {
+            Vector v = (Vector) obj;
+            return getX() == v.getX() && getY() == v.getY();
+        } else if (obj instanceof PVector) {
+            PVector v = (PVector) obj;
+            return getX() == v.getX() && getY() == v.getY();
+        } else
+            return super.equals(obj);
+    }
 }
